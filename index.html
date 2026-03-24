@@ -1,0 +1,1731 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ótica Araujo | Cuidando dos seus olhos desde 1989</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* =============================================
+           TOKENS & RESET
+        ============================================= */
+        :root {
+            --ink: #0D0C0B;
+            --ink-80: rgba(13, 12, 11, 0.8);
+            --ink-40: rgba(13, 12, 11, 0.4);
+            --ink-10: rgba(13, 12, 11, 0.08);
+            --cream: #F6F1E9;
+            --cream-2: #EDE8DF;
+            --white: #FFFFFF;
+            --wine: #7A1510;
+            --wine-light: #9B2218;
+            --gold: #C09A5A;
+            --gold-light: #D4B27A;
+
+            --font-display: 'Cormorant Garamond', Georgia, serif;
+            --font-body: 'DM Sans', system-ui, sans-serif;
+
+            --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+            --dur-fast: 0.25s;
+            --dur-mid: 0.5s;
+            --dur-slow: 0.9s;
+
+            --container: 1240px;
+            --gutter: clamp(20px, 4vw, 48px);
+        }
+
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--cream);
+            color: var(--ink);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        /* Grain texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+            opacity: 0.025;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .container {
+            max-width: var(--container);
+            margin: 0 auto;
+            padding: 0 var(--gutter);
+        }
+
+        /* =============================================
+           TYPOGRAPHY HELPERS
+        ============================================= */
+        .display {
+            font-family: var(--font-display);
+        }
+
+        .eyebrow {
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--wine);
+        }
+
+        /* =============================================
+           HEADER / NAV
+        ============================================= */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 900;
+            padding: 28px 0;
+            transition: padding var(--dur-mid) var(--ease-out),
+                background var(--dur-mid) var(--ease-out),
+                box-shadow var(--dur-mid) var(--ease-out);
+        }
+
+        header.scrolled {
+            padding: 16px 0;
+            background: rgba(246, 241, 233, 0.96);
+            box-shadow: 0 1px 0 var(--ink-10);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.45rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--ink);
+            text-decoration: none;
+            line-height: 1;
+        }
+
+        .logo em {
+            font-style: normal;
+            color: var(--wine);
+        }
+
+        .nav-center {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-center a {
+            text-decoration: none;
+            color: var(--ink);
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            position: relative;
+            padding-bottom: 3px;
+        }
+
+        .nav-center a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--wine);
+            transition: width var(--dur-mid) var(--ease-out);
+        }
+
+        .nav-center a:hover::after {
+            width: 100%;
+        }
+
+        .nav-center a:hover {
+            color: var(--wine);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        /* CTA Button */
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 28px;
+            background: var(--wine);
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            border: 1px solid var(--wine);
+            transition: background var(--dur-fast) var(--ease-out),
+                color var(--dur-fast) var(--ease-out),
+                transform var(--dur-fast) var(--ease-out);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--ink);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform var(--dur-mid) var(--ease-out);
+        }
+
+        .btn-primary:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-primary span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-primary i {
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 28px;
+            background: transparent;
+            color: var(--ink);
+            text-decoration: none;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            border: 1px solid var(--ink-40);
+            transition: border-color var(--dur-fast),
+                color var(--dur-fast),
+                background var(--dur-fast);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--ink);
+            background: var(--ink);
+            color: var(--cream);
+        }
+
+        /* Hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            gap: 5px;
+            cursor: pointer;
+            width: 36px;
+            height: 36px;
+            padding: 4px;
+            background: none;
+            border: none;
+        }
+
+        .hamburger span {
+            display: block;
+            height: 1.5px;
+            background: var(--ink);
+            transition: transform var(--dur-mid) var(--ease-out),
+                opacity var(--dur-fast);
+            transform-origin: center;
+        }
+
+        .hamburger.open span:nth-child(1) {
+            transform: translateY(6.5px) rotate(45deg);
+        }
+
+        .hamburger.open span:nth-child(2) {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+
+        .hamburger.open span:nth-child(3) {
+            transform: translateY(-6.5px) rotate(-45deg);
+        }
+
+        /* Mobile overlay nav */
+        .mobile-nav {
+            position: fixed;
+            inset: 0;
+            background: var(--ink);
+            z-index: 800;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            clip-path: circle(0% at calc(100% - 50px) 50px);
+            transition: clip-path 0.7s var(--ease-out);
+            pointer-events: none;
+        }
+
+        .mobile-nav.open {
+            clip-path: circle(150% at calc(100% - 50px) 50px);
+            pointer-events: all;
+        }
+
+        .mobile-nav a {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 7vw, 4rem);
+            font-weight: 400;
+            color: rgba(246, 241, 233, 0.5);
+            text-decoration: none;
+            letter-spacing: 0.04em;
+            padding: 12px 0;
+            transition: color var(--dur-fast);
+            display: block;
+            text-align: center;
+        }
+
+        .mobile-nav a:hover {
+            color: var(--cream);
+        }
+
+        .mobile-nav .mobile-cta {
+            margin-top: 40px;
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--wine-light);
+            border: 1px solid var(--wine);
+            padding: 14px 36px;
+        }
+
+        .mobile-nav .mobile-cta:hover {
+            background: var(--wine);
+            color: var(--cream);
+        }
+
+        /* =============================================
+           HERO
+        ============================================= */
+        .hero {
+            height: 100svh;
+            min-height: 600px;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            overflow: hidden;
+            padding: 0;
+            /* anula o padding geral de section */
+        }
+
+        .hero-slides {
+            position: absolute;
+            inset: 0;
+        }
+
+        .slide {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.8s var(--ease-in-out);
+            transform: scale(1.06);
+            transition: opacity 1.8s var(--ease-in-out),
+                transform 10s linear;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Layered gradient: dark base at bottom, subtle fade on left */
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(to top, rgba(13, 12, 11, 0.90) 0%, rgba(13, 12, 11, 0.35) 55%, rgba(13, 12, 11, 0.1) 100%),
+                linear-gradient(to right, rgba(13, 12, 11, 0.6) 0%, transparent 60%);
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            padding-bottom: clamp(60px, 8vh, 100px);
+            width: 100%;
+        }
+
+        .hero-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: flex-end;
+            gap: 60px;
+        }
+
+        .hero-left {}
+
+        .hero-eyebrow {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .hero-eyebrow span {
+            font-size: 0.68rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--gold);
+            font-family: var(--font-body);
+            font-weight: 500;
+        }
+
+        .hero-eyebrow::before {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 1px;
+            background: var(--gold);
+            flex-shrink: 0;
+        }
+
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 5.5vw, 5.5rem);
+            font-weight: 400;
+            line-height: 1.0;
+            color: var(--white);
+            letter-spacing: -0.01em;
+            margin-bottom: 32px;
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            color: var(--gold-light);
+        }
+
+        .hero-desc {
+            font-size: 1rem;
+            color: rgba(246, 241, 233, 0.65);
+            max-width: 460px;
+            margin-bottom: 44px;
+            font-weight: 300;
+            line-height: 1.75;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .hero-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 20px;
+            padding-bottom: 4px;
+        }
+
+        .hero-stat {
+            text-align: right;
+            border-right: 2px solid var(--gold);
+            padding-right: 24px;
+        }
+
+        .hero-stat .num {
+            font-family: var(--font-display);
+            font-size: clamp(2.8rem, 4vw, 4rem);
+            font-weight: 300;
+            color: var(--white);
+            line-height: 1;
+        }
+
+        .hero-stat .label {
+            font-size: 0.68rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(246, 241, 233, 0.5);
+            margin-top: 4px;
+        }
+
+        .slide-counter {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .slide-dots {
+            display: flex;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.35);
+            cursor: pointer;
+            transition: background var(--dur-fast), transform var(--dur-fast);
+        }
+
+        .dot.active {
+            background: var(--gold);
+            transform: scale(1.5);
+        }
+
+        /* Scroll cue */
+        .scroll-cue {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.4), transparent);
+            animation: scrollLine 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollLine {
+            0% {
+                transform: scaleY(0);
+                transform-origin: top;
+            }
+
+            50% {
+                transform: scaleY(1);
+                transform-origin: top;
+            }
+
+            51% {
+                transform: scaleY(1);
+                transform-origin: bottom;
+            }
+
+            100% {
+                transform: scaleY(0);
+                transform-origin: bottom;
+            }
+        }
+
+        /* =============================================
+           SECTION COMMONS
+        ============================================= */
+        section {
+            padding: clamp(80px, 12vw, 160px) 0;
+        }
+
+        .section-header {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: clamp(60px, 8vw, 100px);
+        }
+
+        .section-header.centered {
+            align-items: center;
+            text-align: center;
+        }
+
+        .section-rule {
+            width: 48px;
+            height: 2px;
+            background: var(--wine);
+        }
+
+        .section-header.centered .section-rule {
+            margin: 0 auto;
+        }
+
+        .section-title-text {
+            font-family: var(--font-display);
+            font-size: clamp(2.2rem, 4vw, 3.8rem);
+            font-weight: 400;
+            line-height: 1.1;
+            letter-spacing: -0.01em;
+        }
+
+        /* =============================================
+           SOBRE / ABOUT
+        ============================================= */
+        #sobre {
+            background: var(--cream);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: clamp(48px, 8vw, 120px);
+            align-items: center;
+        }
+
+        .about-image-wrap {
+            position: relative;
+        }
+
+        .about-image-wrap img {
+            width: 100%;
+            height: 580px;
+            object-fit: cover;
+        }
+
+        /* Decorative corner accents */
+        .about-image-wrap::before,
+        .about-image-wrap::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 60px;
+        }
+
+        .about-image-wrap::before {
+            top: -16px;
+            left: -16px;
+            border-top: 2px solid var(--wine);
+            border-left: 2px solid var(--wine);
+        }
+
+        .about-image-wrap::after {
+            bottom: -16px;
+            right: -16px;
+            border-bottom: 2px solid var(--gold);
+            border-right: 2px solid var(--gold);
+        }
+
+        .year-badge {
+            position: absolute;
+            bottom: -24px;
+            left: -24px;
+            background: var(--ink);
+            color: var(--cream);
+            padding: 24px 28px;
+            z-index: 2;
+        }
+
+        .year-badge .y {
+            font-family: var(--font-display);
+            font-size: 2.4rem;
+            font-weight: 300;
+            color: var(--gold);
+            line-height: 1;
+            display: block;
+        }
+
+        .year-badge .yl {
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(246, 241, 233, 0.5);
+        }
+
+        .about-text {
+            padding-left: 20px;
+        }
+
+        .about-text p {
+            font-size: 1.05rem;
+            color: var(--ink-80);
+            margin-bottom: 22px;
+            font-weight: 300;
+            line-height: 1.85;
+        }
+
+        .varilux-badge {
+            margin-top: 44px;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            padding: 28px 32px;
+            background: var(--white);
+            border-left: 3px solid var(--wine);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .varilux-badge::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, transparent 70%, var(--cream-2) 100%);
+        }
+
+        .varilux-logo {
+            width: 110px;
+            height: auto;
+            filter: grayscale(1) opacity(0.7);
+            transition: filter var(--dur-mid);
+            flex-shrink: 0;
+        }
+
+        .varilux-badge:hover .varilux-logo {
+            filter: grayscale(0) opacity(1);
+        }
+
+        .varilux-badge-text {}
+
+        .varilux-badge-text strong {
+            display: block;
+            font-size: 0.72rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .varilux-badge-text small {
+            font-size: 0.8rem;
+            color: var(--ink-40);
+            font-weight: 300;
+        }
+
+        /* =============================================
+           SERVIÇOS
+        ============================================= */
+        #servicos {
+            background: var(--ink);
+        }
+
+        #servicos .eyebrow {
+            color: var(--gold);
+        }
+
+        #servicos .section-title-text {
+            color: var(--cream);
+        }
+
+        #servicos .section-rule {
+            background: var(--gold);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .service-card {
+            background: var(--ink);
+            padding: 56px 40px;
+            position: relative;
+            overflow: hidden;
+            transition: background var(--dur-mid) var(--ease-out);
+            cursor: default;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--wine);
+            transition: width var(--dur-slow) var(--ease-out);
+        }
+
+        .service-card:hover::before {
+            width: 100%;
+        }
+
+        .service-card:hover {
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .service-num {
+            font-family: var(--font-display);
+            font-size: 4rem;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.06);
+            line-height: 1;
+            margin-bottom: 32px;
+            transition: color var(--dur-mid);
+        }
+
+        .service-card:hover .service-num {
+            color: rgba(192, 154, 90, 0.2);
+        }
+
+        .service-icon {
+            width: 64px;
+            height: 64px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 28px;
+            transition: border-color var(--dur-fast), background var(--dur-fast);
+        }
+
+        .service-card:hover .service-icon {
+            border-color: var(--wine);
+            background: rgba(122, 21, 16, 0.15);
+        }
+
+        .service-icon i {
+            font-size: 1.6rem;
+            color: var(--gold);
+        }
+
+        .service-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--cream);
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .service-card p {
+            font-size: 0.88rem;
+            color: rgba(246, 241, 233, 0.45);
+            line-height: 1.75;
+            font-weight: 300;
+        }
+
+        /* =============================================
+           DIFERENCIAIS / ESSÊNCIA
+        ============================================= */
+        #diferenciais {
+            background: var(--cream);
+        }
+
+        .diff-layout {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: clamp(60px, 8vw, 120px);
+            align-items: start;
+        }
+
+        .diff-intro {}
+
+        .diff-intro p {
+            font-size: 1rem;
+            color: var(--ink-80);
+            line-height: 1.85;
+            font-weight: 300;
+            margin-top: 24px;
+        }
+
+        .diff-items {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .diff-item {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: 40px;
+            padding: 44px 0;
+            border-bottom: 1px solid var(--ink-10);
+            align-items: start;
+            transition: background var(--dur-fast);
+        }
+
+        .diff-item:first-child {
+            border-top: 1px solid var(--ink-10);
+        }
+
+        .diff-number {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--wine);
+            padding-top: 6px;
+        }
+
+        .diff-text {}
+
+        .diff-text h4 {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 12px;
+            line-height: 1.1;
+        }
+
+        .diff-text p {
+            font-size: 0.9rem;
+            color: var(--ink-80);
+            line-height: 1.75;
+            font-weight: 300;
+        }
+
+        /* =============================================
+           STRIP / BAND
+        ============================================= */
+        .strip {
+            background: var(--wine);
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .strip-track {
+            display: flex;
+            gap: 0;
+            animation: marquee 18s linear infinite;
+            white-space: nowrap;
+        }
+
+        .strip-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 24px;
+            padding: 20px 40px;
+            border-right: 1px solid rgba(255, 255, 255, 0.15);
+            flex-shrink: 0;
+        }
+
+        .strip-item span {
+            font-size: 0.68rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+        }
+
+        .strip-item i {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.6rem;
+        }
+
+        @keyframes marquee {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* =============================================
+           LOCALIZAÇÃO
+        ============================================= */
+        #contato {
+            background: var(--cream);
+        }
+
+        .location-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.6fr;
+            gap: clamp(48px, 6vw, 80px);
+            align-items: start;
+        }
+
+        .location-info {}
+
+        .location-info .section-header {
+            margin-bottom: 48px;
+        }
+
+        .contact-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .contact-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 22px 0;
+            border-bottom: 1px solid var(--ink-10);
+        }
+
+        .contact-list li:first-child {
+            border-top: 1px solid var(--ink-10);
+        }
+
+        .contact-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--wine);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .contact-icon i {
+            font-size: 0.85rem;
+            color: var(--white);
+        }
+
+        .contact-detail strong {
+            display: block;
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: var(--ink-40);
+            margin-bottom: 4px;
+        }
+
+        .contact-detail span {
+            font-size: 0.95rem;
+            color: var(--ink);
+            line-height: 1.5;
+        }
+
+        .map-wrap {
+            position: relative;
+        }
+
+        .map-wrap iframe {
+            width: 100%;
+            height: 520px;
+            border: none;
+            display: block;
+            filter: grayscale(0.15) contrast(1.05);
+        }
+
+        /* Gold corner accent on map */
+        .map-wrap::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            right: -12px;
+            width: 48px;
+            height: 48px;
+            border-bottom: 2px solid var(--gold);
+            border-right: 2px solid var(--gold);
+            pointer-events: none;
+        }
+
+        /* =============================================
+           FOOTER
+        ============================================= */
+        footer {
+            background: var(--ink);
+            color: rgba(246, 241, 233, 0.45);
+            padding: 80px 0 44px;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            padding-bottom: 60px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+            margin-bottom: 40px;
+        }
+
+        .footer-brand {}
+
+        .footer-brand .logo {
+            color: var(--cream);
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .footer-brand p {
+            font-size: 0.88rem;
+            line-height: 1.85;
+            font-weight: 300;
+            max-width: 280px;
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 12px;
+            margin-top: 32px;
+        }
+
+        .social-link {
+            width: 38px;
+            height: 38px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(246, 241, 233, 0.5);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: border-color var(--dur-fast), color var(--dur-fast), background var(--dur-fast);
+        }
+
+        .social-link:hover {
+            border-color: var(--wine);
+            background: var(--wine);
+            color: var(--white);
+        }
+
+        .footer-col h5 {
+            font-size: 0.65rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: var(--cream);
+            margin-bottom: 24px;
+        }
+
+        .footer-col a {
+            display: block;
+            color: rgba(246, 241, 233, 0.45);
+            text-decoration: none;
+            font-size: 0.88rem;
+            margin-bottom: 12px;
+            font-weight: 300;
+            transition: color var(--dur-fast), padding-left var(--dur-fast);
+        }
+
+        .footer-col a:hover {
+            color: var(--cream);
+            padding-left: 6px;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-bottom p {
+            font-size: 0.75rem;
+            font-weight: 300;
+        }
+
+        .footer-bottom .craft {
+            font-size: 0.7rem;
+            color: rgba(246, 241, 233, 0.2);
+        }
+
+        /* =============================================
+           WHATSAPP FLOAT
+        ============================================= */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 36px;
+            right: 36px;
+            width: 58px;
+            height: 58px;
+            background: #25D366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            box-shadow: 0 8px 24px rgba(37, 211, 102, 0.35), 0 2px 6px rgba(0, 0, 0, 0.15);
+            z-index: 800;
+            text-decoration: none;
+            transition: transform var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast);
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1) rotate(8deg);
+            box-shadow: 0 12px 32px rgba(37, 211, 102, 0.45);
+        }
+
+        /* Pulse ring */
+        .whatsapp-float::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 2px solid rgba(37, 211, 102, 0.4);
+            animation: waPulse 2.5s ease-out infinite;
+        }
+
+        @keyframes waPulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        /* =============================================
+           REVEAL ANIMATIONS
+        ============================================= */
+        .reveal {
+            opacity: 0;
+            transform: translateY(32px);
+            transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+        }
+
+        .reveal.up {
+            transform: translateY(32px);
+        }
+
+        .reveal.left {
+            transform: translateX(-32px);
+        }
+
+        .reveal.right {
+            transform: translateX(32px);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translate(0);
+        }
+
+        .reveal-delay-1 {
+            transition-delay: 0.1s;
+        }
+
+        .reveal-delay-2 {
+            transition-delay: 0.2s;
+        }
+
+        .reveal-delay-3 {
+            transition-delay: 0.3s;
+        }
+
+        .reveal-delay-4 {
+            transition-delay: 0.4s;
+        }
+
+        /* =============================================
+           RESPONSIVE
+        ============================================= */
+        @media (max-width: 1100px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .hero-inner {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-right {
+                display: none;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-text {
+                padding-left: 0;
+            }
+
+            .about-image-wrap img {
+                height: 420px;
+            }
+
+            .diff-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .location-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-center {
+                display: none;
+            }
+
+            .nav-right .btn-primary {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .hero h1 {
+                font-size: clamp(2.4rem, 8vw, 3.2rem);
+            }
+
+            .diff-item {
+                grid-template-columns: 48px 1fr;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ============ MOBILE NAV ============ -->
+    <nav class="mobile-nav" id="mobileNav">
+        <a href="#sobre" onclick="closeMobileNav()">Tradição</a>
+        <a href="#servicos" onclick="closeMobileNav()">Especialidades</a>
+        <a href="#diferenciais" onclick="closeMobileNav()">Diferenciais</a>
+        <a href="#contato" onclick="closeMobileNav()">Visite-nos</a>
+        <a href="https://wa.me/551155233786?text=Olá!%20Vi%20o%20site%20da%20Ótica%20Araujo%20e%20gostaria%20de%20saber%20mais." target="_blank" class="mobile-cta">Contato Direto</a>
+    </nav>
+
+    <!-- ============ HEADER ============ -->
+    <header id="header">
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">Ótica<em>Araujo</em></a>
+                <ul class="nav-center">
+                    <li><a href="#sobre">Tradição</a></li>
+                    <li><a href="#servicos">Especialidades</a></li>
+                    <li><a href="#diferenciais">Diferenciais</a></li>
+                    <li><a href="#contato">Visite-nos</a></li>
+                </ul>
+                <div class="nav-right">
+                    <a href="https://wa.me/551155233786?text=Olá!%20Vi%20o%20site%20da%20Ótica%20Araujo%20e%20gostaria%20de%20saber%20mais." target="_blank" class="btn-primary">
+                        <span>Contato Direto</span>
+                    </a>
+                    <button class="hamburger" id="hamburger" aria-label="Menu">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+        <div class="hero-slides">
+            <div class="slide active"
+                style="background-image: url('https://images.unsplash.com/photo-1574258495973-f010dfbb5371?auto=format&fit=crop&q=80&w=2000');">
+            </div>
+            <div class="slide"
+                style="background-image: url('https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&q=80&w=2000');">
+            </div>
+            <div class="slide"
+                style="background-image: url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=2000');">
+            </div>
+            <div class="slide"
+                style="background-image: url('https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=2000');">
+            </div>
+        </div>
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content container">
+            <div class="hero-inner">
+                <div class="hero-left">
+                    <div class="hero-eyebrow"><span>Desde 1989 — São Paulo</span></div>
+
+                    <h1>Elegância que<br><em>transforma</em><br>seu olhar.</h1>
+                    <p class="hero-desc">A união perfeita entre a tradição de três décadas e as inovações tecnológicas
+                        mais sofisticadas do mercado óptico mundial.</p>
+                    <div class="hero-actions">
+                        <a href="https://wa.me/551155233786?text=Olá!%20Vi%20o%20site%20da%20Ótica%20Araujo%20e%20gostaria%20de%20saber%20mais." target="_blank" class="btn-primary">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>Falar no WhatsApp</span>
+                        </a>
+                        <a href="#sobre" class="btn-outline"
+                            style="color:rgba(246,241,233,0.8); border-color:rgba(246,241,233,0.25);">
+                            <span>Saiba mais</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-right">
+                    <div class="hero-stat">
+                        <div class="num">35+</div>
+                        <div class="label">Anos de tradição</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="num">∞</div>
+                        <div class="label">Garantia de adaptação</div>
+                    </div>
+                    <div class="slide-dots" id="slideDots">
+                        <div class="dot active" onclick="goToSlide(0)"></div>
+                        <div class="dot" onclick="goToSlide(1)"></div>
+                        <div class="dot" onclick="goToSlide(2)"></div>
+                        <div class="dot" onclick="goToSlide(3)"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="scroll-cue">
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- ============ MARQUEE STRIP ============ -->
+    <div class="strip">
+        <div class="strip-track">
+            <!-- duplicated for seamless loop -->
+            <div class="strip-item"><span>Especialista Varilux Autorizado</span><i class="fas fa-diamond"></i></div>
+            <div class="strip-item"><span>Visagismo Óptico</span><i class="fas fa-diamond"></i></div>
+            <div class="strip-item"><span>Grifes Exclusivas</span><i class="fas fa-diamond"></i></div>
+            <div class="strip-item"><span>Lentes Blue-Control</span><i class="fas fa-diamond"></i></div>
+            <div class="strip-item"><span>Medição Digital de Alta Precisão</span><i class="fas fa-diamond"></i></div>
+            <div class="strip-item"><span>Adaptação Vitalícia Garantida</span><i class="fas fa-diamond"></i></div>
+            <div class="strip-item"><span>Especialista Varilux Autorizado</span><i class="fas fa-diamond"></i></div>
+            <div class="strip-item"><span>Visagismo Óptico</span><i class="fas fa-diamond"></i></div>
+            <div class="strip-item"><span>Grifes Exclusivas</span><i class="fas fa-diamond"></i></div>
+            <div class="strip-item"><span>Lentes Blue-Control</span><i class="fas fa-diamond"></i></div>
+            <div class="strip-item"><span>Medição Digital de Alta Precisão</span><i class="fas fa-diamond"></i></div>
+            <div class="strip-item"><span>Adaptação Vitalícia Garantida</span><i class="fas fa-diamond"></i></div>
+        </div>
+    </div>
+
+    <!-- ============ SOBRE ============ -->
+    <section id="sobre">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image-wrap reveal left">
+                    <img src="img1.png" alt="Consultoria Óptica Araujo">
+                    <div class="year-badge">
+                        <span class="y">1989</span>
+                        <span class="yl">Fundação</span>
+                    </div>
+                </div>
+                <div class="about-text reveal right">
+                    <div class="section-header" style="margin-bottom:36px;">
+                        <span class="eyebrow">Nossa história</span>
+                        <div class="section-rule"></div>
+                        <h2 class="section-title-text">Compromisso com a sua saúde visual</h2>
+                    </div>
+                    <p>Nascida no coração de São Paulo em 1989, a Ótica Araujo consolidou-se como um símbolo de
+                        confiança e precisão técnica. Nosso atendimento vai além da venda: é uma consultoria estética e
+                        de saúde.</p>
+                    <p>Investimos continuamente em treinamento e tecnologia, sendo uma das poucas óticas da região
+                        certificadas como especialistas em alta complexidade visual.</p>
+
+                    <div class="varilux-badge">
+                        <svg class="varilux-logo" viewBox="0 0 300 60" xmlns="http://www.w3.org/2000/svg">
+                            <text x="0" y="45" font-family="Arial, sans-serif" font-weight="bold" font-size="40"
+                                fill="#004685">VARILUX</text>
+                            <circle cx="195" cy="20" r="5" fill="#e30613" />
+                        </svg>
+                        <div class="varilux-badge-text">
+                            <strong>Especialista Varilux® Autorizado</strong>
+                            <small>Tecnologia líder mundial em lentes progressivas</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ SERVIÇOS ============ -->
+    <section id="servicos">
+        <div class="container">
+            <div class="section-header centered reveal">
+                <span class="eyebrow">O que oferecemos</span>
+                <div class="section-rule"></div>
+                <h2 class="section-title-text" style="color:var(--cream);">Especialidades</h2>
+            </div>
+            <div class="services-grid">
+                <div class="service-card reveal reveal-delay-1">
+                    <div class="service-num">01</div>
+                    <div class="service-icon"><i class="fas fa-eye"></i></div>
+                    <h3>Lentes Varilux</h3>
+                    <p>Referência em lentes multifocais que proporcionam visão nítida em qualquer distância com
+                        transição suave.</p>
+                </div>
+                <div class="service-card reveal reveal-delay-2">
+                    <div class="service-num">02</div>
+                    <div class="service-icon"><i class="fas fa-glasses"></i></div>
+                    <h3>Grifes Exclusivas</h3>
+                    <p>Curadoria rigorosa de armações que unem design contemporâneo, conforto e materiais nobres.</p>
+                </div>
+                <div class="service-card reveal reveal-delay-3">
+                    <div class="service-num">03</div>
+                    <div class="service-icon"><i class="fas fa-laptop-code"></i></div>
+                    <h3>Lentes Blue-Control</h3>
+                    <p>Proteção essencial contra a luz azul de telas, reduzindo o cansaço visual no dia a dia digital.
+                    </p>
+                </div>
+                <div class="service-card reveal reveal-delay-4">
+                    <div class="service-num">04</div>
+                    <div class="service-icon"><i class="fas fa-certificate"></i></div>
+                    <h3>Visagismo Óptico</h3>
+                    <p>Análise técnica do seu formato de rosto para encontrar a armação que melhor realça sua expressão.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ DIFERENCIAIS ============ -->
+    <section id="diferenciais">
+        <div class="container">
+            <div class="diff-layout">
+                <div class="diff-intro reveal left">
+                    <div class="section-header" style="margin-bottom:0;">
+                        <span class="eyebrow">Nossa essência</span>
+                        <div class="section-rule"></div>
+                        <h2 class="section-title-text">O que nos define</h2>
+                    </div>
+                    <p>Mais de três décadas construídas sobre os mesmos pilares: honestidade, técnica e cuidado genuíno
+                        com cada cliente.</p>
+                </div>
+                <div class="diff-items">
+                    <div class="diff-item reveal">
+                        <div class="diff-number">01</div>
+                        <div class="diff-text">
+                            <h4>Confiança</h4>
+                            <p>Mais de 34 anos de história atendendo gerações de famílias com o mesmo zelo e
+                                honestidade.</p>
+                        </div>
+                    </div>
+                    <div class="diff-item reveal reveal-delay-1">
+                        <div class="diff-number">02</div>
+                        <div class="diff-text">
+                            <h4>Precisão</h4>
+                            <p>Processos de medição digital de última geração para montagem perfeita de suas lentes.</p>
+                        </div>
+                    </div>
+                    <div class="diff-item reveal reveal-delay-2">
+                        <div class="diff-number">03</div>
+                        <div class="diff-text">
+                            <h4>Cuidado</h4>
+                            <p>Garantia de adaptação e ajustes vitalícios para que seu conforto nunca seja comprometido.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ LOCALIZAÇÃO ============ -->
+    <section id="contato">
+        <div class="container">
+            <div class="location-grid">
+                <div class="location-info reveal left">
+                    <div class="section-header" style="margin-bottom:48px;">
+                        <span class="eyebrow">Onde nos encontrar</span>
+                        <div class="section-rule"></div>
+                        <h2 class="section-title-text">Visite nosso espaço</h2>
+                    </div>
+                    <ul class="contact-list">
+                        <li>
+                            <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                            <div class="contact-detail">
+                                <strong>Endereço</strong>
+                                <span>Rua Manoel Borba, 254<br>Santo Amaro — São Paulo, SP<br>CEP 04743-010</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
+                            <div class="contact-detail">
+                                <strong>Telefone</strong>
+                                <span>(11) 5523-3786</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
+                            <div class="contact-detail">
+                                <strong>WhatsApp</strong>
+                                <span>(11) 5523-3786</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="contact-icon"><i class="fas fa-clock"></i></div>
+                            <div class="contact-detail">
+                                <strong>Horário de funcionamento</strong>
+                                <span>Segunda a Sexta: 09h às 18h<br>Sábados: 09h às 13h</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="map-wrap reveal right">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3654.5126848035256!2d-46.70884872365287!3d-23.65761356507008!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce510795c696e9%3A0xc6657c96350f16f!2sRua%20Manoel%20Borba%2C%20254%20-%20Santo%20Amaro%2C%20S%C3%A3o%20Paulo%20-%20SP%2C%2004743-010!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr"
+                        allowfullscreen="" loading="lazy" title="Localização Ótica Araujo"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer>
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="#"><img src="logo.png" alt="Ótica Araujo"
+                            style="height:130px; width:auto; margin-bottom:20px; display:block;"></a>
+                    <p>Referência em saúde visual e curadoria de luxo desde 1989. Sua visão em mãos especialistas.</p>
+                    <div class="footer-socials">
+                        <a href="https://www.instagram.com/oticaaraujo1/" class="social-link" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.facebook.com/p/%C3%93tica-Ara%C3%BAjo-61558112665740/" class="social-link" aria-label="Facebook" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h5>Menu</h5>
+                    <a href="#sobre">História</a>
+                    <a href="#servicos">Especialidades</a>
+                    <a href="#diferenciais">Qualidade</a>
+                    <a href="#contato">Endereço</a>
+                </div>
+                <div class="footer-col">
+                    <h5>Atendimento</h5>
+                    <a href="https://wa.me/551155233786?text=Olá!%20Vi%20o%20site%20da%20Ótica%20Araujo%20e%20gostaria%20de%20saber%20mais." target="_blank" rel="noopener">WhatsApp</a>
+                    <a href="tel:+551155233786">(11) 5523-3786</a>
+                    <a href="mailto:sac@oticaaraujo.com.br">sac@oticaaraujo.com.br</a>
+                </div>
+                <div class="footer-col">
+                    <h5>Funcionamento</h5>
+                    <a href="#contato">Seg – Sex: 09h às 18h</a>
+                    <a href="#contato">Sábado: 09h às 13h</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Ótica Araujo. Especialista Varilux Autorizado. Todos os direitos reservados.</p>
+                <span class="craft">Santo Amaro, São Paulo</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/551155233786?text=Olá!%20Vi%20o%20site%20da%20Ótica%20Araujo%20e%20gostaria%20de%20saber%20mais." class="whatsapp-float" target="_blank" aria-label="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // =============================================
+        // CAROUSEL
+        // =============================================
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+
+        function goToSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            dots[currentSlide].classList.remove('active');
+            currentSlide = n;
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+        }
+
+        function nextSlide() {
+            goToSlide((currentSlide + 1) % slides.length);
+        }
+
+        let carouselTimer = setInterval(nextSlide, 6000);
+
+        // Reset timer on manual dot click
+        document.querySelectorAll('.dot').forEach((dot, i) => {
+            dot.addEventListener('click', () => {
+                clearInterval(carouselTimer);
+                goToSlide(i);
+                carouselTimer = setInterval(nextSlide, 6000);
+            });
+        });
+
+        // =============================================
+        // STICKY HEADER
+        // =============================================
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            header.classList.toggle('scrolled', window.scrollY > 60);
+        });
+
+        // =============================================
+        // MOBILE MENU
+        // =============================================
+        const hamburger = document.getElementById('hamburger');
+        const mobileNav = document.getElementById('mobileNav');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('open');
+            mobileNav.classList.toggle('open');
+            document.body.style.overflow = mobileNav.classList.contains('open') ? 'hidden' : '';
+        });
+
+        function closeMobileNav() {
+            hamburger.classList.remove('open');
+            mobileNav.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        // =============================================
+        // REVEAL ON SCROLL
+        // =============================================
+        const revealEls = document.querySelectorAll('.reveal');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.12 });
+
+        revealEls.forEach(el => observer.observe(el));
+    </script>
+</body>
+
+</html>
