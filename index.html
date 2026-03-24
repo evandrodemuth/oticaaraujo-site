@@ -374,7 +374,7 @@
             position: absolute;
             inset: 0;
             background-size: cover;
-            background-position: center;
+            background-position: top;
             opacity: 0;
             transition: opacity 1.8s var(--ease-in-out);
             transform: scale(1.06);
@@ -392,6 +392,7 @@
             position: absolute;
             inset: 0;
             background:
+                linear-gradient(rgba(13, 22, 36, 0.3), rgba(13, 22, 36, 0.3)), /* Subtle navy tint */
                 linear-gradient(to top, rgba(13, 12, 11, 0.90) 0%, rgba(13, 12, 11, 0.35) 55%, rgba(13, 12, 11, 0.1) 100%),
                 linear-gradient(to right, rgba(13, 12, 11, 0.6) 0%, transparent 60%);
             z-index: 2;
