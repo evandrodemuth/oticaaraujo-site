@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Ótica Araujo | Cuidando dos seus olhos há mais de 3 décadas</title>
 
     <!-- Google Fonts -->
@@ -114,7 +114,7 @@
             top: 0;
             width: 100%;
             z-index: 900;
-            padding: 28px 0;
+            padding: calc(28px + env(safe-area-inset-top, 0px)) 0 28px;
             background: rgba(255, 255, 255, 0.6);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
@@ -124,8 +124,25 @@
                 backdrop-filter var(--dur-mid) var(--ease-out);
         }
 
+        /* Solid white background for status bar / dynamic island area */
+        header::before {
+            content: "";
+            position: absolute;
+            top: -100vh; /* Covers overscroll */
+            left: 0;
+            right: 0;
+            height: calc(100vh + env(safe-area-inset-top, 0px));
+            background: var(--white);
+            z-index: -1;
+        }
+
+        header .container {
+            position: relative;
+            z-index: 5;
+        }
+
         header.scrolled {
-            padding: 16px 0;
+            padding: calc(16px + env(safe-area-inset-top, 0px)) 0 16px;
             background: var(--white);
             box-shadow: 0 1px 0 var(--ink-10);
             backdrop-filter: blur(12px);
