@@ -131,12 +131,15 @@
         header::before {
             content: "";
             position: absolute;
-            top: -100vh; /* Covers overscroll */
+            top: -50vh; /* Covers overscroll */
+            bottom: 0;
             left: 0;
             right: 0;
-            height: calc(100vh + env(safe-area-inset-top, 0px));
             background: var(--white);
             z-index: -1;
+            opacity: 0;
+            transition: opacity var(--dur-mid) var(--ease-out);
+            pointer-events: none;
         }
 
         header .container {
@@ -150,6 +153,10 @@
             box-shadow: 0 1px 0 var(--ink-10);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
+        }
+
+        header.scrolled::before {
+            opacity: 1;
         }
 
         nav {
