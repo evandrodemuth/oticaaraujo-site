@@ -115,14 +115,18 @@
             width: 100%;
             z-index: 900;
             padding: 28px 0;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             transition: padding var(--dur-mid) var(--ease-out),
                 background var(--dur-mid) var(--ease-out),
-                box-shadow var(--dur-mid) var(--ease-out);
+                box-shadow var(--dur-mid) var(--ease-out),
+                backdrop-filter var(--dur-mid) var(--ease-out);
         }
 
         header.scrolled {
             padding: 16px 0;
-            background: rgba(246, 241, 233, 0.96);
+            background: var(--white);
             box-shadow: 0 1px 0 var(--ink-10);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
@@ -1686,9 +1690,11 @@
         // STICKY HEADER
         // =============================================
         const header = document.getElementById('header');
-        window.addEventListener('scroll', () => {
+        function handleScroll() {
             header.classList.toggle('scrolled', window.scrollY > 60);
-        });
+        }
+        window.addEventListener('scroll', handleScroll);
+        handleScroll(); // Check immediately on load
 
         // =============================================
         // MOBILE MENU
