@@ -1342,6 +1342,11 @@
                 font-size: clamp(2.4rem, 8vw, 3.2rem);
             }
 
+            header.scrolled {
+                padding-top: calc(32px + env(safe-area-inset-top, 24px));
+                padding-bottom: 20px;
+            }
+
             .diff-item {
                 grid-template-columns: 48px 1fr;
                 gap: 20px;
